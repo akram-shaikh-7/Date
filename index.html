@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A little question 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink: #ff6fa3;
+      --pink-dark: #a0325a;
+      --pink-light: #ffd6e7;
+      --pink-pale: #fff0f5;
+      --card-bg: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      background: var(--pink-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .petal {
+      position: fixed;
+      animation: floatDown linear infinite;
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes floatDown {
+      0%   { transform: translateY(-60px) rotate(0deg); opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .page {
+      display: none;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    .page.active { display: flex; }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 44px 40px 38px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(255,111,163,0.18), 0 2px 8px rgba(255,111,163,0.1);
+      animation: popIn 0.55s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.75); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+    .emoji-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffd6e7, #ffb3d0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px;
+      margin: 0 auto 22px;
+      box-shadow: 0 4px 18px rgba(255,111,163,0.25);
+      border: 3px solid var(--pink-light);
+    }
+    .emoji-avatar.square { border-radius: 22px; }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--pink-dark);
+      margin-bottom: 28px;
+      line-height: 1.35;
+    }
+    h1.big {
+      font-size: 1.85rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      font-size: 0.95rem;
+      color: #c06080;
+      font-weight: 600;
+      margin-top: -16px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:active { transform: scale(0.95) !important; }
+    .btn-primary {
+      background: linear-gradient(135deg, #ff6fa3, #ff3d7f);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(255,63,127,0.35);
+    }
+    .btn-primary:hover { transform: scale(1.06); box-shadow: 0 6px 22px rgba(255,63,127,0.42); }
+    .btn-soft {
+      background: linear-gradient(135deg, #ffd6e7, #ffb3d0);
+      color: var(--pink-dark);
+      box-shadow: 0 4px 12px rgba(255,111,163,0.2);
+    }
+    .btn-soft:hover { transform: scale(1.05); }
+
+    /* No button */
+    .btn-no {
+      background: linear-gradient(135deg, #e8d0f5, #c9aaee);
+      color: #6b3fa0;
+      box-shadow: 0 4px 12px rgba(180,120,240,0.2);
+      position: fixed;
+      transition: none;
+      white-space: nowrap;
+      z-index: 9999;
+    }
+    .buttons-wrap {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      min-height: 56px;
+      position: relative;
+    }
+
+    /* Date grid */
+    .date-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .date-card {
+      border: 2.5px solid var(--pink-light);
+      border-radius: 16px;
+      padding: 14px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #fff;
+      font-weight: 700;
+      color: var(--pink-dark);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .date-card:hover { border-color: var(--pink); background: var(--pink-pale); transform: scale(1.03); }
+    .date-card.selected {
+      border-color: var(--pink);
+      background: linear-gradient(135deg, #ffd6e7, #ffecf5);
+      box-shadow: 0 4px 14px rgba(255,111,163,0.25);
+      transform: scale(1.04);
+    }
+    .date-card .date-day { font-size: 0.75rem; font-weight: 600; color: #c06080; margin-bottom: 2px; }
+    .date-card .date-num { font-size: 1.4rem; font-weight: 900; color: var(--pink-dark); }
+    .date-card .date-month { font-size: 0.78rem; color: #c06080; font-weight: 600; }
+
+    /* Plan cards */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .plan-card {
+      border: 2.5px solid var(--pink-light);
+      border-radius: 18px;
+      padding: 20px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #fff;
+      text-align: left;
+    }
+    .plan-card:hover { border-color: var(--pink); background: var(--pink-pale); transform: scale(1.02); }
+    .plan-card.selected {
+      border-color: var(--pink);
+      background: linear-gradient(135deg, #ffd6e7, #ffecf5);
+      box-shadow: 0 4px 14px rgba(255,111,163,0.25);
+    }
+    .plan-time {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--pink-dark);
+      margin-bottom: 6px;
+    }
+    .plan-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--pink);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .plan-steps {
+      list-style: none;
+      padding: 0;
+    }
+    .plan-steps li {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--pink-dark);
+      padding: 4px 0;
+      border-bottom: 1px dashed var(--pink-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .plan-steps li:last-child { border-bottom: none; }
+
+    /* Final */
+    .final-msg {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--pink-dark);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .final-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      color: #c06080;
+      margin-top: 8px;
+    }
+    .hearts-row { font-size: 1.6rem; margin: 16px 0 8px; letter-spacing: 4px; }
+    .summary-pill {
+      display: inline-block;
+      background: var(--pink-pale);
+      border: 2px solid var(--pink-light);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--pink-dark);
+      margin: 4px;
+    }
+    .no-counter { font-size: 0.72rem; color: #c06080; margin-top: 10px; min-height: 18px; }
+    @keyframes bounce { from{transform:scale(1)} to{transform:scale(1.2)} }
+  </style>
+</head>
+<body>
+
+<!-- PAGE 1: Will you go on a date -->
+<div class="page active" id="page1">
+  <div class="card">
+    <div class="emoji-avatar square">🐱</div>
+    <h1>🌸 Neslie, would you go on a date with Akram? 🌸</h1>
+    <div class="buttons-wrap" id="buttons1">
+      <button class="btn btn-primary" onclick="goToPage('page2-shock')">Yes! 🥰</button>
+      <button class="btn btn-no" id="noBtn" onmouseenter="runAway()" onclick="runAway()">no... 🙈</button>
+    </div>
+    <p class="no-counter" id="noCounter"></p>
+  </div>
+</div>
+
+<!-- PAGE 2: Shock -->
+<div class="page" id="page2-shock">
+  <div class="card">
+    <img src="nezuko.jpg" class="emoji-avatar square" style="object-fit:cover;font-size:0;" onerror="this.style.fontSize='52px';this.textContent='😍';">
+    <h1 class="big">WAIT YOU ACTUALLY SAID YES?? 😭</h1>
+    <p class="subtitle">I was so ready for you to say no 😅</p>
+    <button class="btn btn-soft" onclick="goToPage('page3-date')" style="margin-top:8px;">okay okay! →</button>
+  </div>
+</div>
+
+<!-- PAGE 3: Date picker (weekends only) -->
+<div class="page" id="page3-date">
+  <div class="card">
+    <div style="font-size:2.2rem;margin-bottom:14px;">📅</div>
+    <h1>So... when are you free?</h1>
+    <p class="subtitle" style="margin-top:-20px;margin-bottom:18px;">Pick a weekend that works for you 🌸</p>
+    <div class="date-grid" id="dateGrid"></div>
+    <button class="btn btn-primary" id="dateNext" onclick="goToPage('page4-plan')" style="width:100%;opacity:0.4;pointer-events:none;">Next →</button>
+  </div>
+</div>
+
+<!-- PAGE 4: Plan picker -->
+<div class="page" id="page4-plan">
+  <div class="card">
+    <div style="font-size:2.2rem;margin-bottom:14px;">✨</div>
+    <h1>Pick your vibe!</h1>
+    <div class="plan-grid">
+
+      <div class="plan-card" id="plan-am" onclick="selectPlan('am')">
+        <div class="plan-time">11 AM</div>
+        <div class="plan-label">☀️ Afternoon Plan</div>
+        <ul class="plan-steps">
+          <li>🎾 Tennis / Pickleball</li>
+          <li>🍽️ Lunch</li>
+          <li>🍦 Ice Cream</li>
+        </ul>
+      </div>
+
+      <div class="plan-card" id="plan-pm" onclick="selectPlan('pm')">
+        <div class="plan-time">6 PM</div>
+        <div class="plan-label">🌙 Evening Plan</div>
+        <ul class="plan-steps">
+          <li>🎳 Bowling / Mini Putt</li>
+          <li>🍽️ Dinner</li>
+          <li>🍦 Ice Cream</li>
+        </ul>
+      </div>
+
+    </div>
+    <button class="btn btn-primary" id="planNext" onclick="showFinal()" style="width:100%;opacity:0.4;pointer-events:none;">Let's do it! 🚗</button>
+  </div>
+</div>
+
+<!-- PAGE 5: Final -->
+<div class="page" id="page6-final">
+  <div class="card">
+    <div class="emoji-avatar" style="font-size:40px;width:90px;height:90px;">🚗💨</div>
+    <div class="hearts-row">💗 💕 💗</div>
+    <p class="final-msg" id="finalMsg"></p>
+    <div id="summaryPills" style="margin:16px 0;"></div>
+    <p class="final-sub">I made this website for you.<br>no big deal 😌</p>
+    <div style="margin-top:24px;font-size:1.8rem;animation:bounce 0.6s infinite alternate;">🌸</div>
+  </div>
+</div>
+
+<script>
+  // Petals
+  const emos = ['🌸','🌺','💕','🌷','💮'];
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('span');
+    p.className = 'petal';
+    p.textContent = emos[Math.floor(Math.random()*emos.length)];
+    p.style.left = Math.random()*100+'vw';
+    p.style.animationDuration = (4+Math.random()*7)+'s';
+    p.style.animationDelay = (-Math.random()*10)+'s';
+    p.style.fontSize = (0.8+Math.random()*1.1)+'rem';
+    document.body.appendChild(p);
+  }
+
+  // State
+  let noCount = 0;
+  let selectedDate = '';
+  let selectedPlan = '';
+
+  const taunts = [
+    'no... 🙈','still no 😤','nope 🙅','not a chance 😤',
+    'never! 😡','absolutely not 🫠','stop it 😤','you wish 💅',
+    'keep trying 😂','nice try 🏃','catch me if you can 😝',
+    'i am so fast 🚀','still here 👋','you can\'t catch me 😈','...okay fine 🫣'
+  ];
+
+  function goToPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    burstHearts(6);
+  }
+
+  function burstHearts(n) {
+    for (let i = 0; i < n; i++) {
+      const h = document.createElement('span');
+      h.className = 'petal';
+      h.textContent = ['💖','💕','💗','🌸'][Math.floor(Math.random()*4)];
+      h.style.left = Math.random()*100+'vw';
+      h.style.animationDuration = (2+Math.random()*2.5)+'s';
+      h.style.animationDelay = '0s';
+      h.style.fontSize = (1+Math.random()*1.2)+'rem';
+      h.style.opacity = '0.85';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 4500);
+    }
+  }
+
+  // No button
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.querySelector('#page1 .btn-primary');
+  const noCounter = document.getElementById('noCounter');
+
+  function initNoBtn() {
+    const yRect = yesBtn.getBoundingClientRect();
+    noBtn.style.top  = yRect.top + 'px';
+    noBtn.style.left = (yRect.right + 16) + 'px';
+  }
+
+  function runAway() {
+    noCount++;
+    noBtn.textContent = taunts[Math.min(noCount-1, taunts.length-1)];
+    const s = 1 + Math.min(noCount * 0.08, 1.2);
+    yesBtn.style.transform = `scale(${s})`;
+    noBtn.style.transform = 'scale(1)';
+    noBtn.style.opacity = '1';
+    noBtn.style.visibility = 'visible';
+    noBtn.style.display = 'block';
+
+    const card = document.querySelector('#page1 .card');
+    const cardRect = card.getBoundingClientRect();
+    const btnW = noBtn.offsetWidth  || 120;
+    const btnH = noBtn.offsetHeight || 48;
+    const pad = 14;
+    const minX = cardRect.left + pad;
+    const maxX = cardRect.right  - btnW - pad;
+    const minY = cardRect.top  + pad;
+    const maxY = cardRect.bottom - btnH - pad;
+    noBtn.style.left = (minX + Math.random() * Math.max(maxX - minX, 0)) + 'px';
+    noBtn.style.top  = (minY + Math.random() * Math.max(maxY - minY, 0)) + 'px';
+
+    if (noCount >= 13)     noCounter.textContent = "okay it's NEVER going away 😂 just say yes!";
+    else if (noCount >= 10) noCounter.textContent = `${noCount} tries... it's literally running from you 💀`;
+    else if (noCount >= 7)  noCounter.textContent = "the no button is having the time of its life 😂";
+    else if (noCount >= 3)  noCounter.textContent = `${noCount} attempts... maybe just say yes? 🥺`;
+  }
+
+  window.addEventListener('load', initNoBtn);
+  window.addEventListener('resize', initNoBtn);
+
+  // Build weekend date grid — next 6 weekends
+  function buildDateGrid() {
+    const grid = document.getElementById('dateGrid');
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const weekends = [];
+    const d = new Date(today);
+    // find next 8 weekend days (sat/sun)
+    while (weekends.length < 8) {
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() === 0 || d.getDay() === 6) {
+        weekends.push(new Date(d));
+      }
+    }
+    weekends.forEach(date => {
+      const card = document.createElement('div');
+      card.className = 'date-card';
+      card.innerHTML = `
+        <div class="date-day">${days[date.getDay()]}</div>
+        <div class="date-num">${date.getDate()}</div>
+        <div class="date-month">${months[date.getMonth()]}</div>
+      `;
+      card.addEventListener('click', () => {
+        grid.querySelectorAll('.date-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedDate = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`;
+        const btn = document.getElementById('dateNext');
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = 'auto';
+      });
+      grid.appendChild(card);
+    });
+  }
+  buildDateGrid();
+
+  // Plan selection
+  function selectPlan(plan) {
+    document.getElementById('plan-am').classList.remove('selected');
+    document.getElementById('plan-pm').classList.remove('selected');
+    document.getElementById('plan-' + plan).classList.add('selected');
+    selectedPlan = plan;
+    const btn = document.getElementById('planNext');
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+  }
+
+  // Final
+  function showFinal() {
+    const isAM = selectedPlan === 'am';
+    const time = isAM ? '11:00 AM' : '6:00 PM';
+    const planName = isAM ? '☀️ Afternoon Plan' : '🌙 Evening Plan';
+    const planDetails = isAM
+      ? '🎾 Tennis / Pickleball → 🍽️ Lunch → 🍦 Ice Cream'
+      : '🎳 Bowling / Mini Putt → 🍽️ Dinner → 🍦 Ice Cream';
+
+    document.getElementById('finalMsg').innerHTML =
+      `you didn't say no. 🌸<br>be ready on <span style="color:var(--pink)">${selectedDate}</span> at <span style="color:var(--pink)">${time}</span>,<br>I'm coming to get you 🚗`;
+
+    document.getElementById('summaryPills').innerHTML = `
+      <span class="summary-pill">📅 ${selectedDate}</span>
+      <span class="summary-pill">🕐 ${time}</span>
+      <span class="summary-pill">${planDetails}</span>
+    `;
+
+    goToPage('page6-final');
+    burstHearts(16);
+  }
+</script>
+
+</body>
+</html>

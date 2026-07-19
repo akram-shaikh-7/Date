@@ -38,6 +38,22 @@
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
+    /* Confetti */
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      pointer-events: none;
+      z-index: 9998;
+      animation: confettiFall linear forwards;
+      border-radius: 2px;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
     .page {
       display: none;
       position: relative;
@@ -111,13 +127,13 @@
     .btn-primary {
       background: linear-gradient(135deg, #a0714f, #7b4f2e);
       color: #fff;
-      box-shadow: 0 4px 16px rgba(255,63,127,0.35);
+      box-shadow: 0 4px 16px rgba(120,80,40,0.35);
     }
-    .btn-primary:hover { transform: scale(1.06); box-shadow: 0 6px 22px rgba(255,63,127,0.42); }
+    .btn-primary:hover { transform: scale(1.06); }
     .btn-soft {
       background: linear-gradient(135deg, #d4a882, #c49065);
-      color: var(--pink-dark);
-      box-shadow: 0 4px 12px rgba(255,111,163,0.2);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(180,120,60,0.2);
     }
     .btn-soft:hover { transform: scale(1.05); }
 
@@ -131,6 +147,15 @@
       white-space: nowrap;
       z-index: 9999;
     }
+    .btn-no.dramatic {
+      animation: shake 0.3s infinite;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0) rotate(0deg); }
+      25%      { transform: translateX(-4px) rotate(-3deg); }
+      75%      { transform: translateX(4px) rotate(3deg); }
+    }
+
     .buttons-wrap {
       display: flex;
       gap: 16px;
@@ -193,62 +218,69 @@
       background: linear-gradient(135deg, #ffd6e7, #ffecf5);
       box-shadow: 0 4px 14px rgba(255,111,163,0.25);
     }
-    .plan-time {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--pink-dark);
-      margin-bottom: 6px;
-    }
-    .plan-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--pink);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
-    }
-    .plan-steps {
-      list-style: none;
-      padding: 0;
-    }
+    .plan-time { font-size: 1.5rem; font-weight: 900; color: var(--pink-dark); margin-bottom: 6px; }
+    .plan-label { font-size: 0.78rem; font-weight: 700; color: var(--pink); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .plan-steps { list-style: none; padding: 0; }
     .plan-steps li {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--pink-dark);
-      padding: 4px 0;
-      border-bottom: 1px dashed var(--pink-light);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 0.82rem; font-weight: 700; color: var(--pink-dark);
+      padding: 4px 0; border-bottom: 1px dashed var(--pink-light);
+      display: flex; align-items: center; gap: 6px;
     }
     .plan-steps li:last-child { border-bottom: none; }
 
     /* Final */
     .final-msg {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--pink-dark);
-      line-height: 1.5;
-      margin-bottom: 10px;
+      font-size: 1.25rem; font-weight: 800; color: var(--pink-dark);
+      line-height: 1.5; margin-bottom: 10px;
     }
-    .final-sub {
-      font-family: 'Caveat', cursive;
-      font-size: 1.15rem;
-      color: #c06080;
-      margin-top: 8px;
-    }
-    .hearts-row { font-size: 1.6rem; margin: 16px 0 8px; letter-spacing: 4px; }
+    .final-sub { font-family: 'Caveat', cursive; font-size: 1.15rem; color: #c06080; margin-top: 8px; }
+    .hearts-row { font-size: 1.6rem; margin: 12px 0 8px; letter-spacing: 4px; }
     .summary-pill {
       display: inline-block;
       background: var(--pink-pale);
       border: 2px solid var(--pink-light);
       border-radius: 50px;
       padding: 6px 16px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--pink-dark);
-      margin: 4px;
+      font-size: 0.85rem; font-weight: 700; color: var(--pink-dark); margin: 4px;
     }
+
+    /* Our photo */
+    .our-photo {
+      width: 100%; max-width: 340px;
+      border-radius: 18px;
+      object-fit: cover;
+      margin: 14px auto 0;
+      display: block;
+      box-shadow: 0 6px 24px rgba(160,80,60,0.2);
+      border: 3px solid var(--pink-light);
+    }
+
+    /* Hidden message */
+    .secret-btn {
+      margin-top: 16px;
+      background: none;
+      border: 2px dashed var(--pink-light);
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: #c06080;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .secret-btn:hover { border-color: var(--pink); color: var(--pink); transform: scale(1.04); }
+    .secret-message {
+      display: none;
+      margin-top: 16px;
+      background: linear-gradient(135deg, #fff0f5, #ffd6e7);
+      border-radius: 18px;
+      padding: 18px 20px;
+      animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .secret-message.show { display: block; }
+    .secret-message p { font-family: 'Caveat', cursive; font-size: 1.25rem; color: var(--pink-dark); line-height: 1.5; }
+    .secret-message .tagalog { font-size: 1rem; color: #c06080; margin-top: 6px; font-style: italic; }
+
     .no-counter { font-size: 0.72rem; color: #c06080; margin-top: 10px; min-height: 18px; }
     @keyframes bounce { from{transform:scale(1)} to{transform:scale(1.2)} }
   </style>
@@ -259,9 +291,9 @@
 <div class="page active" id="page1">
   <div class="card">
     <img src="IMG_7505.jpeg" style="width:100px;height:100px;object-fit:cover;border-radius:22px;margin:0 auto 22px;display:block;border:3px solid #ffd6e7;box-shadow:0 4px 18px rgba(255,111,163,0.25);">
-    <h1>🌸 Neslie, you can’t get rid of Akram… date #3? 🌸</h1>
+    <h1>🌸 Neslie, you can't get rid of Akram… date #3? 🌸</h1>
     <div class="buttons-wrap" id="buttons1">
-      <button class="btn btn-primary" onclick="goToPage('page2-shock')">Yes! 🥰</button>
+      <button class="btn btn-primary" onclick="sayYes()">Yes! 🥰</button>
       <button class="btn btn-no" id="noBtn" onmouseenter="runAway()" onclick="runAway()">no... 🙈</button>
     </div>
     <p class="no-counter" id="noCounter"></p>
@@ -295,27 +327,24 @@
     <div style="font-size:2.2rem;margin-bottom:14px;">✨</div>
     <h1>Pick your vibe!</h1>
     <div class="plan-grid">
-
       <div class="plan-card" id="plan-am" onclick="selectPlan('am')">
         <div class="plan-time">2 PM</div>
         <div class="plan-label">☀️ Afternoon Plan</div>
         <ul class="plan-steps">
-          <li>🎾 Tennis </li>
+          <li>🎾 Tennis</li>
           <li>🍽️ Lunch</li>
           <li>🌅 Sunset</li>
         </ul>
       </div>
-
       <div class="plan-card" id="plan-pm" onclick="selectPlan('pm')">
         <div class="plan-time">5 PM</div>
         <div class="plan-label">🌙 Evening Plan</div>
         <ul class="plan-steps">
-          <li>🎮🎯 Outdoor Movie</li>
+          <li>🎬 Outdoor Movie</li>
           <li>🍽️ Dinner</li>
           <li>🚗🤝 Just us!</li>
         </ul>
       </div>
-
     </div>
     <button class="btn btn-primary" id="planNext" onclick="showFinal()" style="width:100%;opacity:0.4;pointer-events:none;">Let's do it! 🚗</button>
   </div>
@@ -324,12 +353,17 @@
 <!-- PAGE 5: Final -->
 <div class="page" id="page6-final">
   <div class="card">
-    <div class="emoji-avatar" style="font-size:40px;width:90px;height:90px;">🚗💨</div>
     <div class="hearts-row">💗 💕 💗</div>
     <p class="final-msg" id="finalMsg"></p>
-    <div id="summaryPills" style="margin:16px 0;"></div>
+    <div id="summaryPills" style="margin:12px 0;"></div>
+    <img src="IMG_7515.png" class="our-photo" alt="Us 🤎">
     <p class="final-sub">I made this website for you.<br>no big deal 😌</p>
-    <div style="margin-top:24px;font-size:1.8rem;animation:bounce 0.6s infinite alternate;">🌸</div>
+    <button class="secret-btn" onclick="revealSecret()">🤫 psst... tap here</button>
+    <div class="secret-message" id="secretMsg">
+      <p>keep smiling, you look GWAPA 🤎<br><br>
+      <span class="tagalog">"masaya ako na kasama kita ngayon." 🌸</span></p>
+    </div>
+    <div style="margin-top:16px;font-size:1.6rem;animation:bounce 0.6s infinite alternate;">🌸</div>
   </div>
 </div>
 
@@ -347,6 +381,26 @@
     document.body.appendChild(p);
   }
 
+  // Confetti
+  function launchConfetti() {
+    const colors = ['#ff6fa3','#a0714f','#ffd6e7','#7b4f2e','#ffb3d0','#c9aaee','#fff','#ffc400'];
+    for (let i = 0; i < 120; i++) {
+      setTimeout(() => {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        c.style.left = Math.random()*100+'vw';
+        c.style.background = colors[Math.floor(Math.random()*colors.length)];
+        c.style.width = (6+Math.random()*10)+'px';
+        c.style.height = (6+Math.random()*10)+'px';
+        c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        c.style.animationDuration = (2+Math.random()*3)+'s';
+        c.style.animationDelay = '0s';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 5000);
+      }, Math.random()*1200);
+    }
+  }
+
   // State
   let noCount = 0;
   let selectedDate = '';
@@ -355,9 +409,11 @@
   const taunts = [
     'no... 🙈','still no 😤','nope 🙅','not a chance 😤',
     'never! 😡','absolutely not 🫠','stop it 😤','you wish 💅',
-    'keep trying 😂','nice try 🏃','catch me if you can 😝',
-    'i am so fast 🚀','still here 👋','you can\'t catch me 😈','...okay fine 🫣'
+    'keep trying 😂','nice try 🏃','okay I\'m crying 😭','please stop 🥺',
+    'fine... I give up 😩','why are you like this 😭','...okay fine 🫣'
   ];
+
+  const dramaticAt = 6; // starts shaking after this many clicks
 
   function goToPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -365,11 +421,17 @@
     burstHearts(6);
   }
 
+  function sayYes() {
+    launchConfetti();
+    burstHearts(20);
+    setTimeout(() => goToPage('page2-shock'), 600);
+  }
+
   function burstHearts(n) {
     for (let i = 0; i < n; i++) {
       const h = document.createElement('span');
       h.className = 'petal';
-      h.textContent = ['💖','💕','💗','🌸'][Math.floor(Math.random()*4)];
+      h.textContent = ['💖','💕','💗','🌸','🤎'][Math.floor(Math.random()*5)];
       h.style.left = Math.random()*100+'vw';
       h.style.animationDuration = (2+Math.random()*2.5)+'s';
       h.style.animationDelay = '0s';
@@ -394,9 +456,14 @@
   function runAway() {
     noCount++;
     noBtn.textContent = taunts[Math.min(noCount-1, taunts.length-1)];
+
+    // dramatic shaking after 6 attempts
+    if (noCount >= dramaticAt) {
+      noBtn.classList.add('dramatic');
+    }
+
     const s = 1 + Math.min(noCount * 0.08, 1.2);
     yesBtn.style.transform = `scale(${s})`;
-    noBtn.style.transform = 'scale(1)';
     noBtn.style.opacity = '1';
     noBtn.style.visibility = 'visible';
     noBtn.style.display = 'block';
@@ -413,16 +480,16 @@
     noBtn.style.left = (minX + Math.random() * Math.max(maxX - minX, 0)) + 'px';
     noBtn.style.top  = (minY + Math.random() * Math.max(maxY - minY, 0)) + 'px';
 
-    if (noCount >= 13)     noCounter.textContent = "okay it's NEVER going away 😂 just say yes!";
-    else if (noCount >= 10) noCounter.textContent = `${noCount} tries... it's literally running from you 💀`;
-    else if (noCount >= 7)  noCounter.textContent = "the no button is having the time of its life 😂";
+    if (noCount >= 13)      noCounter.textContent = "okay it's NEVER going away 😂 just say yes!";
+    else if (noCount >= 10) noCounter.textContent = `${noCount} tries... it's literally crying now 😭`;
+    else if (noCount >= 7)  noCounter.textContent = "the no button is begging you to stop 🥺";
     else if (noCount >= 3)  noCounter.textContent = `${noCount} attempts... maybe just say yes? 🥺`;
   }
 
   window.addEventListener('load', initNoBtn);
   window.addEventListener('resize', initNoBtn);
 
-  // Build weekend date grid — next 6 weekends
+  // Weekend date grid
   function buildDateGrid() {
     const grid = document.getElementById('dateGrid');
     const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -431,12 +498,9 @@
     today.setHours(0,0,0,0);
     const weekends = [];
     const d = new Date(today);
-    // find next 8 weekend days (sat/sun)
     while (weekends.length < 8) {
       d.setDate(d.getDate() + 1);
-      if (d.getDay() === 0 || d.getDay() === 6) {
-        weekends.push(new Date(d));
-      }
+      if (d.getDay() === 0 || d.getDay() === 6) weekends.push(new Date(d));
     }
     weekends.forEach(date => {
       const card = document.createElement('div');
@@ -473,11 +537,10 @@
   // Final
   function showFinal() {
     const isAM = selectedPlan === 'am';
-    const time = isAM ? '11:00 AM' : '6:00 PM';
-    const planName = isAM ? '☀️ Afternoon Plan' : '🌙 Evening Plan';
+    const time = isAM ? '2:00 PM' : '5:00 PM';
     const planDetails = isAM
-      ? '🎾 Tennis / Pickleball → 🍽️ Lunch → 🍦 Ice Cream'
-      : '🎳 Bowling / Mini Putt → 🍽️ Dinner → 🍦 Ice Cream';
+      ? '🎾 Tennis → 🍽️ Lunch → 🌅 Sunset'
+      : '🎬 Outdoor Movie → 🍽️ Dinner → 🚗🤝 Just us!';
 
     document.getElementById('finalMsg').innerHTML =
       `you didn't say no. 🌸<br>be ready on <span style="color:var(--pink)">${selectedDate}</span> at <span style="color:var(--pink)">${time}</span>,<br>I'm coming to get you 🚗`;
@@ -489,7 +552,17 @@
     `;
 
     goToPage('page6-final');
-    burstHearts(16);
+    launchConfetti();
+    burstHearts(20);
+  }
+
+  // Hidden message reveal
+  function revealSecret() {
+    const msg = document.getElementById('secretMsg');
+    const btn = document.querySelector('.secret-btn');
+    msg.classList.add('show');
+    btn.style.display = 'none';
+    burstHearts(10);
   }
 </script>
 

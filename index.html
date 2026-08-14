@@ -219,6 +219,46 @@
     .no-counter { font-size: 0.72rem; color: #c06080; margin-top: 10px; min-height: 18px; }
     @keyframes bounce { from{transform:scale(1)} to{transform:scale(1.2)} }
 
+    /* Polaroid collage */
+    .collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin: 16px auto 0;
+      max-width: 360px;
+    }
+    .polaroid {
+      background: #fff;
+      padding: 6px 6px 22px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+      border-radius: 2px;
+      transform: rotate(var(--r));
+      animation: fadeInPolaroid 0.5s ease both;
+      animation-delay: var(--delay);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .polaroid:hover { transform: rotate(0deg) scale(1.08); z-index: 10; position: relative; }
+    .polaroid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      border-radius: 1px;
+    }
+    .polaroid p {
+      font-family: 'Caveat', cursive;
+      font-size: 0.75rem;
+      color: #a0325a;
+      text-align: center;
+      margin-top: 4px;
+      line-height: 1;
+    }
+    @keyframes fadeInPolaroid {
+      from { opacity: 0; transform: rotate(var(--r)) scale(0.8); }
+      to   { opacity: 1; transform: rotate(var(--r)) scale(1); }
+    }
+
     /* ---- COMMENTED OUT STYLES (date grid, plan cards) kept below for future use ---- */
     /*
     .date-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
@@ -317,7 +357,69 @@
   <div class="card">
     <div class="hearts-row">💗 💕 💗</div>
     <p class="final-msg">you didn't say no this time 🌸<br>so I'm taking that as a <span style="color:var(--pink)">YES</span> 🤎</p>
-    <img src="IMG_7515.png" class="our-photo" alt="Us 🤎">
+    <!-- Photo Collage -->
+    <div class="collage">
+      <div class="polaroid" style="--r:-3deg; --delay:0s">
+        <img src="IMG_7506.jpeg" alt="">
+        <p>us 🤎</p>
+      </div>
+      <div class="polaroid" style="--r:2.5deg; --delay:0.08s">
+        <img src="IMG_7507.jpeg" alt="">
+        <p>bestie 😄</p>
+      </div>
+      <div class="polaroid" style="--r:-2deg; --delay:0.16s">
+        <img src="IMG_7888.jpeg" alt="">
+        <p>tennis day ☀️</p>
+      </div>
+      <div class="polaroid" style="--r:3deg; --delay:0.24s">
+        <img src="IMG_7600.jpeg" alt="">
+        <p>zoo vibes 🦎</p>
+      </div>
+      <div class="polaroid" style="--r:-1.5deg; --delay:0.32s">
+        <img src="IMG_7603.jpeg" alt="">
+        <p>explore 🌍</p>
+      </div>
+      <div class="polaroid" style="--r:2deg; --delay:0.4s">
+        <img src="IMG_7615.jpeg" alt="">
+        <p>art girl 🎨</p>
+      </div>
+      <div class="polaroid" style="--r:-3.5deg; --delay:0.48s">
+        <img src="IMG_7644.jpeg" alt="">
+        <p>glowing ✨</p>
+      </div>
+      <div class="polaroid" style="--r:1.5deg; --delay:0.56s">
+        <img src="IMG_7661.jpeg" alt="">
+        <p>eating good 😋</p>
+      </div>
+      <div class="polaroid" style="--r:-2.5deg; --delay:0.64s">
+        <img src="IMG_7781.jpeg" alt="">
+        <p>moody 😤</p>
+      </div>
+      <div class="polaroid" style="--r:3deg; --delay:0.72s">
+        <img src="IMG_7784.jpeg" alt="">
+        <p>dinner date 🍽️</p>
+      </div>
+      <div class="polaroid" style="--r:-1deg; --delay:0.8s">
+        <img src="IMG_7866.jpeg" alt="">
+        <p>she ate 😍</p>
+      </div>
+      <div class="polaroid" style="--r:2.5deg; --delay:0.88s">
+        <img src="IMG_7883.jpeg" alt="">
+        <p>flowers 🌸</p>
+      </div>
+      <div class="polaroid" style="--r:-3deg; --delay:0.96s">
+        <img src="IMG_7463.jpeg" alt="">
+        <p>pouty 🥺</p>
+      </div>
+      <div class="polaroid" style="--r:1deg; --delay:1.04s">
+        <img src="IMG_7467.jpeg" alt="">
+        <p>that smile 😍</p>
+      </div>
+      <div class="polaroid" style="--r:-2deg; --delay:1.12s">
+        <img src="IMG_7500.jpeg" alt="">
+        <p>roses 🌹</p>
+      </div>
+    </div>
     <p class="final-sub">I made this website for you.<br>no big deal 😌</p>
     <button class="secret-btn" onclick="revealSecret()">🤫 psst... tap here</button>
     <div class="secret-message" id="secretMsg">

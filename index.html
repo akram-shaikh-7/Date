@@ -41,8 +41,6 @@
     /* Confetti */
     .confetti-piece {
       position: fixed;
-      width: 10px;
-      height: 10px;
       top: -10px;
       pointer-events: none;
       z-index: 9998;
@@ -81,18 +79,6 @@
       to   { transform: scale(1);    opacity: 1; }
     }
 
-    .emoji-avatar {
-      width: 100px; height: 100px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #a0714f, #7b4f2e);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 56px;
-      margin: 0 auto 22px;
-      box-shadow: 0 4px 18px rgba(255,111,163,0.25);
-      border: 3px solid var(--pink-light);
-    }
-    .emoji-avatar.square { border-radius: 22px; }
-
     h1 {
       font-size: 1.6rem;
       font-weight: 800;
@@ -101,7 +87,7 @@
       line-height: 1.35;
     }
     h1.big {
-      font-size: 1.85rem;
+      font-size: 1.75rem;
       font-weight: 900;
       text-transform: uppercase;
     }
@@ -111,6 +97,15 @@
       font-weight: 600;
       margin-top: -16px;
       margin-bottom: 24px;
+    }
+    .intro-text {
+      font-size: 1rem;
+      color: #c06080;
+      font-weight: 600;
+      margin-bottom: 24px;
+      line-height: 1.6;
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
     }
 
     .btn {
@@ -147,9 +142,7 @@
       white-space: nowrap;
       z-index: 9999;
     }
-    .btn-no.dramatic {
-      animation: shake 0.3s infinite;
-    }
+    .btn-no.dramatic { animation: shake 0.3s infinite; }
     @keyframes shake {
       0%,100% { transform: translateX(0) rotate(0deg); }
       25%      { transform: translateX(-4px) rotate(-3deg); }
@@ -166,87 +159,26 @@
       position: relative;
     }
 
-    /* Date grid */
-    .date-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .date-card {
-      border: 2.5px solid var(--pink-light);
-      border-radius: 16px;
-      padding: 14px 10px;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: #fff;
-      font-weight: 700;
-      color: var(--pink-dark);
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    .date-card:hover { border-color: var(--pink); background: var(--pink-pale); transform: scale(1.03); }
-    .date-card.selected {
-      border-color: var(--pink);
-      background: linear-gradient(135deg, #ffd6e7, #ffecf5);
-      box-shadow: 0 4px 14px rgba(255,111,163,0.25);
-      transform: scale(1.04);
-    }
-    .date-card .date-day { font-size: 0.75rem; font-weight: 600; color: #c06080; margin-bottom: 2px; }
-    .date-card .date-num { font-size: 1.4rem; font-weight: 900; color: var(--pink-dark); }
-    .date-card .date-month { font-size: 0.78rem; color: #c06080; font-weight: 600; }
-
-    /* Plan cards */
-    .plan-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-    .plan-card {
-      border: 2.5px solid var(--pink-light);
-      border-radius: 18px;
-      padding: 20px 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: #fff;
-      text-align: left;
-    }
-    .plan-card:hover { border-color: var(--pink); background: var(--pink-pale); transform: scale(1.02); }
-    .plan-card.selected {
-      border-color: var(--pink);
-      background: linear-gradient(135deg, #ffd6e7, #ffecf5);
-      box-shadow: 0 4px 14px rgba(255,111,163,0.25);
-    }
-    .plan-time { font-size: 1.5rem; font-weight: 900; color: var(--pink-dark); margin-bottom: 6px; }
-    .plan-label { font-size: 0.78rem; font-weight: 700; color: var(--pink); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
-    .plan-steps { list-style: none; padding: 0; }
-    .plan-steps li {
-      font-size: 0.82rem; font-weight: 700; color: var(--pink-dark);
-      padding: 4px 0; border-bottom: 1px dashed var(--pink-light);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .plan-steps li:last-child { border-bottom: none; }
-
     /* Final */
     .final-msg {
-      font-size: 1.25rem; font-weight: 800; color: var(--pink-dark);
-      line-height: 1.5; margin-bottom: 10px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--pink-dark);
+      line-height: 1.5;
+      margin-bottom: 10px;
     }
-    .final-sub { font-family: 'Caveat', cursive; font-size: 1.15rem; color: #c06080; margin-top: 8px; }
+    .final-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      color: #c06080;
+      margin-top: 8px;
+    }
     .hearts-row { font-size: 1.6rem; margin: 12px 0 8px; letter-spacing: 4px; }
-    .summary-pill {
-      display: inline-block;
-      background: var(--pink-pale);
-      border: 2px solid var(--pink-light);
-      border-radius: 50px;
-      padding: 6px 16px;
-      font-size: 0.85rem; font-weight: 700; color: var(--pink-dark); margin: 4px;
-    }
 
     /* Our photo */
     .our-photo {
-      width: 100%; max-width: 340px;
+      width: 100%;
+      max-width: 340px;
       border-radius: 18px;
       object-fit: cover;
       margin: 14px auto 0;
@@ -267,6 +199,9 @@
       color: #c06080;
       cursor: pointer;
       transition: all 0.2s;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     .secret-btn:hover { border-color: var(--pink); color: var(--pink); transform: scale(1.04); }
     .secret-message {
@@ -278,20 +213,41 @@
       animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
     }
     .secret-message.show { display: block; }
-    .secret-message p { font-family: 'Caveat', cursive; font-size: 1.25rem; color: var(--pink-dark); line-height: 1.5; }
-    .secret-message .tagalog { font-size: 1rem; color: #c06080; margin-top: 6px; font-style: italic; }
+    .secret-message p { font-family: 'Caveat', cursive; font-size: 1.25rem; color: var(--pink-dark); line-height: 1.6; }
+    .secret-message .tagalog { font-size: 1.05rem; color: #c06080; margin-top: 6px; font-style: italic; }
 
     .no-counter { font-size: 0.72rem; color: #c06080; margin-top: 10px; min-height: 18px; }
     @keyframes bounce { from{transform:scale(1)} to{transform:scale(1.2)} }
+
+    /* ---- COMMENTED OUT STYLES (date grid, plan cards) kept below for future use ---- */
+    /*
+    .date-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+    .date-card { border: 2.5px solid var(--pink-light); border-radius: 16px; padding: 14px 10px; cursor: pointer; transition: all 0.2s; background: #fff; font-weight: 700; color: var(--pink-dark); font-size: 0.9rem; line-height: 1.4; }
+    .date-card:hover { border-color: var(--pink); background: var(--pink-pale); transform: scale(1.03); }
+    .date-card.selected { border-color: var(--pink); background: linear-gradient(135deg, #ffd6e7, #ffecf5); box-shadow: 0 4px 14px rgba(255,111,163,0.25); transform: scale(1.04); }
+    .date-card .date-day { font-size: 0.75rem; font-weight: 600; color: #c06080; margin-bottom: 2px; }
+    .date-card .date-num { font-size: 1.4rem; font-weight: 900; color: var(--pink-dark); }
+    .date-card .date-month { font-size: 0.78rem; color: #c06080; font-weight: 600; }
+    .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    .plan-card { border: 2.5px solid var(--pink-light); border-radius: 18px; padding: 20px 14px; cursor: pointer; transition: all 0.2s; background: #fff; text-align: left; }
+    .plan-card:hover { border-color: var(--pink); background: var(--pink-pale); transform: scale(1.02); }
+    .plan-card.selected { border-color: var(--pink); background: linear-gradient(135deg, #ffd6e7, #ffecf5); box-shadow: 0 4px 14px rgba(255,111,163,0.25); }
+    .plan-time { font-size: 1.5rem; font-weight: 900; color: var(--pink-dark); margin-bottom: 6px; }
+    .plan-label { font-size: 0.78rem; font-weight: 700; color: var(--pink); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .plan-steps { list-style: none; padding: 0; }
+    .plan-steps li { font-size: 0.82rem; font-weight: 700; color: var(--pink-dark); padding: 4px 0; border-bottom: 1px dashed var(--pink-light); display: flex; align-items: center; gap: 6px; }
+    .plan-steps li:last-child { border-bottom: none; }
+    */
   </style>
 </head>
 <body>
 
-<!-- PAGE 1: Will you go on a date -->
+<!-- PAGE 1: Will you be my girlfriend -->
 <div class="page active" id="page1">
   <div class="card">
-    <img src="IMG_7505.jpeg" style="width:200px;height:200px;object-fit:cover;border-radius:22px;margin:0 auto 22px;display:block;border:3px solid #ffd6e7;box-shadow:0 4px 18px rgba(255,111,163,0.25);">
-    <h1>🌸 Neslie, you can't get rid of Akram… date #3? 🌸</h1>
+    <img src="IMG_7505.jpeg" style="width:160px;height:160px;object-fit:cover;border-radius:22px;margin:0 auto 22px;display:block;border:3px solid #ffd6e7;box-shadow:0 4px 18px rgba(255,111,163,0.25);">
+    <h1>🌸 Neslie, will you be my girlfriend? 🌸</h1>
+    <p class="intro-text">I already asked in person but you went all shy on me 😏<br>so let me make it a little easier for you...</p>
     <div class="buttons-wrap" id="buttons1">
       <button class="btn btn-primary" onclick="sayYes()">Yes! 🥰</button>
       <button class="btn btn-no" id="noBtn" onmouseenter="runAway()" onclick="runAway()">no... 🙈</button>
@@ -300,17 +256,19 @@
   </div>
 </div>
 
-<!-- PAGE 2: Shock -->
+<!-- PAGE 2: Shock reaction -->
 <div class="page" id="page2-shock">
   <div class="card">
     <img src="IMG_0055.jpeg" style="width:100px;height:100px;object-fit:cover;border-radius:22px;margin:0 auto 22px;display:block;border:3px solid #ffd6e7;box-shadow:0 4px 18px rgba(255,111,163,0.25);">
-    <h1 class="big">WAIT YOU ACTUALLY SAID YES again?? 😭</h1>
-    <p class="subtitle">I don't want to go for third time 😅</p>
-    <button class="btn btn-soft" onclick="goToPage('page3-date')" style="margin-top:8px;">okay okay! →</button>
+    <h1 class="big">WAIT YOU ACTUALLY SAID YES?? 😭</h1>
+    <p class="subtitle">I was so ready for you to go shy again 😅</p>
+    <button class="btn btn-soft" onclick="goToPage('page6-final')" style="margin-top:8px;">okay okay! →</button>
   </div>
 </div>
 
-<!-- PAGE 3: Date picker (weekends only) -->
+<!-- ============================================================
+     DATE PICKER PAGE — commented out, uncomment to re-enable
+     ============================================================
 <div class="page" id="page3-date">
   <div class="card">
     <div style="font-size:2.2rem;margin-bottom:14px;">📅</div>
@@ -320,8 +278,11 @@
     <button class="btn btn-primary" id="dateNext" onclick="goToPage('page4-plan')" style="width:100%;opacity:0.4;pointer-events:none;">Next →</button>
   </div>
 </div>
+============================================================ -->
 
-<!-- PAGE 4: Plan picker -->
+<!-- ============================================================
+     PLAN PICKER PAGE — commented out, uncomment to re-enable
+     ============================================================
 <div class="page" id="page4-plan">
   <div class="card">
     <div style="font-size:2.2rem;margin-bottom:14px;">✨</div>
@@ -349,13 +310,13 @@
     <button class="btn btn-primary" id="planNext" onclick="showFinal()" style="width:100%;opacity:0.4;pointer-events:none;">Let's do it! 🚗</button>
   </div>
 </div>
+============================================================ -->
 
-<!-- PAGE 5: Final -->
+<!-- PAGE 3: Final -->
 <div class="page" id="page6-final">
   <div class="card">
     <div class="hearts-row">💗 💕 💗</div>
-    <p class="final-msg" id="finalMsg"></p>
-    <div id="summaryPills" style="margin:12px 0;"></div>
+    <p class="final-msg">you didn't say no this time 🌸<br>so I'm taking that as a <span style="color:var(--pink)">YES</span> 🤎</p>
     <img src="IMG_7515.png" class="our-photo" alt="Us 🤎">
     <p class="final-sub">I made this website for you.<br>no big deal 😌</p>
     <button class="secret-btn" onclick="revealSecret()">🤫 psst... tap here</button>
@@ -384,7 +345,7 @@
   // Confetti
   function launchConfetti() {
     const colors = ['#ff6fa3','#a0714f','#ffd6e7','#7b4f2e','#ffb3d0','#c9aaee','#fff','#ffc400'];
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 140; i++) {
       setTimeout(() => {
         const c = document.createElement('div');
         c.className = 'confetti-piece';
@@ -394,17 +355,14 @@
         c.style.height = (6+Math.random()*10)+'px';
         c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
         c.style.animationDuration = (2+Math.random()*3)+'s';
-        c.style.animationDelay = '0s';
         document.body.appendChild(c);
         setTimeout(() => c.remove(), 5000);
-      }, Math.random()*1200);
+      }, Math.random()*1400);
     }
   }
 
   // State
   let noCount = 0;
-  let selectedDate = '';
-  let selectedPlan = '';
 
   const taunts = [
     'no... 🙈','still no 😤','nope 🙅','not a chance 😤',
@@ -412,8 +370,6 @@
     'keep trying 😂','nice try 🏃','okay I\'m crying 😭','please stop 🥺',
     'fine... I give up 😩','why are you like this 😭','...okay fine 🫣'
   ];
-
-  const dramaticAt = 6; // starts shaking after this many clicks
 
   function goToPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -435,8 +391,8 @@
       h.style.left = Math.random()*100+'vw';
       h.style.animationDuration = (2+Math.random()*2.5)+'s';
       h.style.animationDelay = '0s';
-      h.style.fontSize = (1+Math.random()*1.2)+'rem';
-      h.style.opacity = '0.85';
+      h.style.fontSize = (1+Math.random()*1.4)+'rem';
+      h.style.opacity = '0.9';
       document.body.appendChild(h);
       setTimeout(() => h.remove(), 4500);
     }
@@ -456,11 +412,7 @@
   function runAway() {
     noCount++;
     noBtn.textContent = taunts[Math.min(noCount-1, taunts.length-1)];
-
-    // dramatic shaking after 6 attempts
-    if (noCount >= dramaticAt) {
-      noBtn.classList.add('dramatic');
-    }
+    if (noCount >= 6) noBtn.classList.add('dramatic');
 
     const s = 1 + Math.min(noCount * 0.08, 1.2);
     yesBtn.style.transform = `scale(${s})`;
@@ -473,97 +425,74 @@
     const btnW = noBtn.offsetWidth  || 120;
     const btnH = noBtn.offsetHeight || 48;
     const pad = 14;
-    const minX = cardRect.left + pad;
-    const maxX = cardRect.right  - btnW - pad;
-    const minY = cardRect.top  + pad;
-    const maxY = cardRect.bottom - btnH - pad;
-    noBtn.style.left = (minX + Math.random() * Math.max(maxX - minX, 0)) + 'px';
-    noBtn.style.top  = (minY + Math.random() * Math.max(maxY - minY, 0)) + 'px';
+    noBtn.style.left = (cardRect.left + pad + Math.random() * Math.max(cardRect.right - btnW - pad - cardRect.left - pad, 0)) + 'px';
+    noBtn.style.top  = (cardRect.top  + pad + Math.random() * Math.max(cardRect.bottom - btnH - pad - cardRect.top - pad, 0)) + 'px';
 
-    if (noCount >= 13)      noCounter.textContent = "okay it's NEVER going away 😂 just say yes!";
-    else if (noCount >= 10) noCounter.textContent = `${noCount} tries... it's literally crying now 😭`;
+    if (noCount >= 13)      noCounter.textContent = "she's not escaping this one 😂 just say yes!";
+    else if (noCount >= 10) noCounter.textContent = `${noCount} tries... the button is literally crying 😭`;
     else if (noCount >= 7)  noCounter.textContent = "the no button is begging you to stop 🥺";
-    else if (noCount >= 3)  noCounter.textContent = `${noCount} attempts... maybe just say yes? 🥺`;
+    else if (noCount >= 3)  noCounter.textContent = `${noCount} attempts... you know you want to say yes 🥺`;
   }
 
   window.addEventListener('load', initNoBtn);
   window.addEventListener('resize', initNoBtn);
 
-  // Weekend date grid
+  // Hidden message
+  function revealSecret() {
+    document.getElementById('secretMsg').classList.add('show');
+    document.querySelector('.secret-btn').style.display = 'none';
+    burstHearts(12);
+  }
+
+  // Final page confetti on load
+  const observer = new MutationObserver(() => {
+    if (document.getElementById('page6-final').classList.contains('active')) {
+      launchConfetti();
+      burstHearts(20);
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.getElementById('page6-final'), { attributes: true, attributeFilter: ['class'] });
+
+  /* ============================================================
+     DATE GRID & PLAN SELECTION — commented out, uncomment to re-enable
+
   function buildDateGrid() {
     const grid = document.getElementById('dateGrid');
     const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    const weekends = [];
-    const d = new Date(today);
-    while (weekends.length < 8) {
-      d.setDate(d.getDate() + 1);
-      if (d.getDay() === 0 || d.getDay() === 6) weekends.push(new Date(d));
-    }
+    const today = new Date(); today.setHours(0,0,0,0);
+    const weekends = []; const d = new Date(today);
+    while (weekends.length < 8) { d.setDate(d.getDate()+1); if(d.getDay()===0||d.getDay()===6) weekends.push(new Date(d)); }
     weekends.forEach(date => {
-      const card = document.createElement('div');
-      card.className = 'date-card';
-      card.innerHTML = `
-        <div class="date-day">${days[date.getDay()]}</div>
-        <div class="date-num">${date.getDate()}</div>
-        <div class="date-month">${months[date.getMonth()]}</div>
-      `;
+      const card = document.createElement('div'); card.className = 'date-card';
+      card.innerHTML = `<div class="date-day">${days[date.getDay()]}</div><div class="date-num">${date.getDate()}</div><div class="date-month">${months[date.getMonth()]}</div>`;
       card.addEventListener('click', () => {
-        grid.querySelectorAll('.date-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
+        grid.querySelectorAll('.date-card').forEach(c=>c.classList.remove('selected')); card.classList.add('selected');
         selectedDate = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`;
-        const btn = document.getElementById('dateNext');
-        btn.style.opacity = '1';
-        btn.style.pointerEvents = 'auto';
-      });
-      grid.appendChild(card);
+        const btn = document.getElementById('dateNext'); btn.style.opacity='1'; btn.style.pointerEvents='auto';
+      }); grid.appendChild(card);
     });
   }
   buildDateGrid();
 
-  // Plan selection
   function selectPlan(plan) {
     document.getElementById('plan-am').classList.remove('selected');
     document.getElementById('plan-pm').classList.remove('selected');
-    document.getElementById('plan-' + plan).classList.add('selected');
+    document.getElementById('plan-'+plan).classList.add('selected');
     selectedPlan = plan;
-    const btn = document.getElementById('planNext');
-    btn.style.opacity = '1';
-    btn.style.pointerEvents = 'auto';
+    const btn = document.getElementById('planNext'); btn.style.opacity='1'; btn.style.pointerEvents='auto';
   }
 
-  // Final
   function showFinal() {
-    const isAM = selectedPlan === 'am';
-    const time = isAM ? '2:00 PM' : '5:00 PM';
-    const planDetails = isAM
-      ? '🎾 Tennis → 🍽️ Lunch → 🌅 Sunset'
-      : '🎬 Outdoor Movie → 🍽️ Dinner → 🚗🤝 Just us!';
-
-    document.getElementById('finalMsg').innerHTML =
-      `you didn't say no. 🌸<br>be ready on <span style="color:var(--pink)">${selectedDate}</span> at <span style="color:var(--pink)">${time}</span>,<br>I'm coming to get you 🚗`;
-
-    document.getElementById('summaryPills').innerHTML = `
-      <span class="summary-pill">📅 ${selectedDate}</span>
-      <span class="summary-pill">🕐 ${time}</span>
-      <span class="summary-pill">${planDetails}</span>
-    `;
-
-    goToPage('page6-final');
-    launchConfetti();
-    burstHearts(20);
+    const isAM = selectedPlan==='am';
+    const time = isAM?'2:00 PM':'5:00 PM';
+    const planDetails = isAM?'🎾 Tennis → 🍽️ Lunch → 🌅 Sunset':'🎬 Outdoor Movie → 🍽️ Dinner → 🚗🤝 Just us!';
+    document.getElementById('finalMsg').innerHTML = `you didn't say no. 🌸<br>be ready on <span style="color:var(--pink)">${selectedDate}</span> at <span style="color:var(--pink)">${time}</span>,<br>I'm coming to get you 🚗`;
+    document.getElementById('summaryPills').innerHTML = `<span class="summary-pill">📅 ${selectedDate}</span><span class="summary-pill">🕐 ${time}</span><span class="summary-pill">${planDetails}</span>`;
+    goToPage('page6-final'); launchConfetti(); burstHearts(20);
   }
-
-  // Hidden message reveal
-  function revealSecret() {
-    const msg = document.getElementById('secretMsg');
-    const btn = document.querySelector('.secret-btn');
-    msg.classList.add('show');
-    btn.style.display = 'none';
-    burstHearts(10);
-  }
+  ============================================================ */
 </script>
 
 </body>
